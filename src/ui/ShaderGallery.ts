@@ -27,7 +27,7 @@ export class ShaderGallery {
         <h1 class="gallery-title">Shader Thoughts</h1>
         <div class="gallery-controls">
           <label class="bloom-toggle">
-            <input type="checkbox" id="bloom-enabled" checked>
+            <input type="checkbox" id="bloom-enabled">
             <span>Bloom</span>
           </label>
           <input type="range" id="bloom-strength" min="0" max="2" step="0.1" value="0.5">
