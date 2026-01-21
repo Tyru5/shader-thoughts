@@ -11,12 +11,29 @@ export class ShaderGallery {
   private shaderList!: HTMLElement;
   private currentIndex = 0;
   private options: GalleryOptions;
+  private isVisible = true;
+  private hint!: HTMLElement;
 
   constructor(options: GalleryOptions) {
     this.options = options;
     this.container = this.createUI();
+    this.hint = this.createHint();
     document.body.appendChild(this.container);
+    document.body.appendChild(this.hint);
     this.setupKeyboardNav();
+  }
+
+  private createHint(): HTMLElement {
+    const hint = document.createElement("div");
+    hint.className = "ui-hint hidden";
+    hint.textContent = "Press H to show UI";
+    return hint;
+  }
+
+  toggleUI() {
+    this.isVisible = !this.isVisible;
+    this.container.classList.toggle("hidden", !this.isVisible);
+    this.hint.classList.toggle("hidden", this.isVisible);
   }
 
   private createUI(): HTMLElement {
@@ -44,6 +61,7 @@ export class ShaderGallery {
         <span id="shader-counter">1 / ${this.options.shaderNames.length}</span>
         <button id="next-shader">&rarr;</button>
       </div>
+      <div class="keyboard-hint">Press H to hide UI</div>
     `;
 
     this.shaderList = container.querySelector(".shader-list")!;
@@ -111,6 +129,7 @@ export class ShaderGallery {
     document.addEventListener("keydown", (e) => {
       if (e.key === "ArrowLeft") this.navigate(-1);
       else if (e.key === "ArrowRight") this.navigate(1);
+      else if (e.key.toLowerCase() === "h") this.toggleUI();
     });
   }
 
