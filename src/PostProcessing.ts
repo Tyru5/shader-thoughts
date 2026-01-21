@@ -23,7 +23,7 @@ export class PostProcessing {
     this.composer.addPass(this.renderPass);
 
     this.bloomSettings = {
-      enabled: true,
+      enabled: false,
       strength: 0.5,
       radius: 0.4,
       threshold: 0.8,
@@ -36,6 +36,7 @@ export class PostProcessing {
       this.bloomSettings.radius,
       this.bloomSettings.threshold
     );
+    this.bloomPass.enabled = this.bloomSettings.enabled;
     this.composer.addPass(this.bloomPass);
   }
 

@@ -24,6 +24,7 @@
     "vite-plugin-glsl": "^1.5.5"
   },
   "dependencies": {
-    "three": "^0.182.0"
+    "three": "^0.182.0",
+    "vercel": "^50.4.8"
   }
 }
