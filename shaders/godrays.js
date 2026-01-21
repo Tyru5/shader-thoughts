@@ -56,5 +56,5 @@ void main() {
   col = pow(col, 0.7);
 
   fragColor = vec4(vec3(col), 1.0);
-}`
+}`,
 };

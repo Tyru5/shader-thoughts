@@ -99,5 +99,5 @@ void main() {
   color += vec3(0.1, 0.15, 0.25) * ripple;
 
   fragColor = vec4(color, 1.0);
-}`
+}`,
 };

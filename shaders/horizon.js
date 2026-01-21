@@ -78,5 +78,5 @@ void main() {
   color += vec3(0.01, 0.02, 0.04) * (1.0 - uv.y);
 
   fragColor = vec4(color, 1.0);
-}`
+}`,
 };

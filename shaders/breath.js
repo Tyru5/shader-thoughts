@@ -87,5 +87,5 @@ void main() {
   color *= 0.85 + vignette * 0.15;
 
   fragColor = vec4(color, 1.0);
-}`
+}`,
 };

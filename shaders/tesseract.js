@@ -164,5 +164,5 @@ void main() {
   color *= vig;
 
   fragColor = vec4(color, 1.0);
-}`
+}`,
 };

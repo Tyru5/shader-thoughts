@@ -166,5 +166,5 @@ void main() {
   color *= 0.9;
 
   fragColor = vec4(color, 1.0);
-}`
+}`,
 };

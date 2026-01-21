@@ -160,5 +160,5 @@ void main() {
   color = pow(color, vec3(1.1));
 
   fragColor = vec4(color, 1.0);
-}`
+}`,
 };

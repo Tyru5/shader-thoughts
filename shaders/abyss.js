@@ -183,5 +183,5 @@ void main() {
   color += grain;
 
   fragColor = vec4(color, 1.0);
-}`
+}`,
 };

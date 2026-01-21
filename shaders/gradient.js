@@ -20,5 +20,5 @@ void main() {
   vec3 color = mix(col1, col2, gradient);
 
   fragColor = vec4(color, 1.0);
-}`
+}`,
 };
