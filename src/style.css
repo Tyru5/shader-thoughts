@@ -78,6 +78,42 @@ body {
   cursor: pointer;
 }
 
+#resolution-select {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #aaa;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  outline: none;
+}
+
+#resolution-select:hover,
+#resolution-select:focus {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+#resolution-select option {
+  background: #222;
+  color: #fff;
+}
+
+#snapshot-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  filter: grayscale(1) brightness(0.7);
+  transition: filter 0.2s;
+}
+
+#snapshot-btn:hover {
+  filter: grayscale(0) brightness(1);
+}
+
 #fullscreen-btn {
   background: none;
   border: none;

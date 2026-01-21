@@ -1,9 +1,12 @@
+import { RESOLUTIONS } from "../utils/snapshot";
+
 export interface GalleryOptions {
   shaderNames: string[];
   onShaderSelect: (name: string) => void;
   onBloomToggle: (enabled: boolean) => void;
   onBloomStrengthChange: (strength: number) => void;
   onFullscreen: () => void;
+  onSnapshot: (resolution: { width: number; height: number }) => void;
 }
 
 export class ShaderGallery {
@@ -48,6 +51,10 @@ export class ShaderGallery {
             <span>Bloom</span>
           </label>
           <input type="range" id="bloom-strength" min="0" max="2" step="0.1" value="0.5">
+          <select id="resolution-select">
+            ${RESOLUTIONS.map((r, i) => `<option value="${i}">${r.label}</option>`).join("")}
+          </select>
+          <button id="snapshot-btn" title="Save Screenshot">📷</button>
           <button id="fullscreen-btn" title="Fullscreen">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
               <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
@@ -75,6 +82,13 @@ export class ShaderGallery {
     const bloomStrength = container.querySelector("#bloom-strength") as HTMLInputElement;
     bloomStrength.addEventListener("input", () => {
       this.options.onBloomStrengthChange(parseFloat(bloomStrength.value));
+    });
+
+    const resolutionSelect = container.querySelector("#resolution-select") as HTMLSelectElement;
+    const snapshotBtn = container.querySelector("#snapshot-btn")!;
+    snapshotBtn.addEventListener("click", () => {
+      const idx = parseInt(resolutionSelect.value, 10);
+      this.options.onSnapshot(RESOLUTIONS[idx]);
     });
 
     const fullscreenBtn = container.querySelector("#fullscreen-btn")!;
@@ -125,11 +139,22 @@ export class ShaderGallery {
     counter.textContent = `${this.currentIndex + 1} / ${this.options.shaderNames.length}`;
   }
 
+  private getSelectedResolution(): { width: number; height: number } {
+    const select = this.container.querySelector("#resolution-select") as HTMLSelectElement;
+    const idx = parseInt(select.value, 10);
+    return RESOLUTIONS[idx];
+  }
+
+  triggerSnapshot() {
+    this.options.onSnapshot(this.getSelectedResolution());
+  }
+
   private setupKeyboardNav() {
     document.addEventListener("keydown", (e) => {
       if (e.key === "ArrowLeft") this.navigate(-1);
       else if (e.key === "ArrowRight") this.navigate(1);
       else if (e.key.toLowerCase() === "h") this.toggleUI();
+      else if (e.key.toLowerCase() === "s") this.triggerSnapshot();
     });
   }
 

@@ -59,6 +59,10 @@ export class ShaderManager {
     return Object.keys(this.shaders);
   }
 
+  getCurrentShaderName(): string | null {
+    return this.currentShader;
+  }
+
   loadShader(name: string): boolean {
     const shader = this.shaders[name];
     if (!shader) return false;

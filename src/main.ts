@@ -5,6 +5,7 @@ import { ShaderManager } from "./ShaderManager";
 import { PostProcessing } from "./PostProcessing";
 import { MouseTracker } from "./controls/MouseTracker";
 import { ShaderGallery } from "./ui/ShaderGallery";
+import { captureSnapshot } from "./utils/snapshot";
 
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 
@@ -39,7 +40,7 @@ function resize() {
 resize();
 window.addEventListener("resize", resize);
 
-new ShaderGallery({
+const gallery = new ShaderGallery({
   shaderNames: shaderManager.getShaderNames(),
   onShaderSelect: (name) => {
     shaderManager.loadShader(name);
@@ -53,6 +54,18 @@ new ShaderGallery({
     } else {
       document.documentElement.requestFullscreen();
     }
+  },
+  onSnapshot: async (resolution) => {
+    gallery.toggleUI();
+    const name = shaderManager.getCurrentShaderName() || "shader";
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+    await captureSnapshot({
+      renderer,
+      postProcessing,
+      resolution,
+      filename: `${name}_${timestamp}.png`,
+    });
+    gallery.toggleUI();
   },
 });
 
