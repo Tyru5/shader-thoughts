@@ -1,4 +1,5 @@
 export const tesseract = {
+  resolutionScale: 0.75,
   fragment: `#version 300 es
 precision highp float;
 

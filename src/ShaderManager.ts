@@ -3,6 +3,7 @@ import * as THREE from "three";
 export interface ShaderDef {
   fragment: string;
   vertex?: string;
+  resolutionScale?: number;
 }
 
 export type ShaderUniforms = {
@@ -36,6 +37,7 @@ export class ShaderManager {
   private mesh: THREE.Mesh;
   uniforms: ShaderUniforms;
   currentShader: string | null = null;
+  private currentResolutionScale: number = 1.0;
 
   constructor(shaders: Record<string, ShaderDef>) {
     this.shaders = shaders;
@@ -82,8 +84,13 @@ export class ShaderManager {
 
     this.mesh.material = material;
     this.currentShader = name;
+    this.currentResolutionScale = shader.resolutionScale ?? 1.0;
     this.uniforms.u_time.value = 0;
     return true;
+  }
+
+  getResolutionScale(): number {
+    return this.currentResolutionScale;
   }
 
   updateUniforms(time: number, resolution: THREE.Vector2, mouse: THREE.Vector2) {

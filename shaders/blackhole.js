@@ -1,4 +1,5 @@
 export const blackhole = {
+  resolutionScale: 0.5,
   fragment: `#version 300 es
 precision highp float;
 

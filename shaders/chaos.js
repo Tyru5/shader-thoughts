@@ -1,4 +1,5 @@
 export const chaos = {
+  resolutionScale: 0.6,
   fragment: `#version 300 es
 precision highp float;
 

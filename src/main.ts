@@ -32,9 +32,12 @@ const resolution = new THREE.Vector2();
 function resize() {
   const w = window.innerWidth;
   const h = window.innerHeight;
+  const scale = shaderManager.getResolutionScale();
+  const dpr = window.devicePixelRatio * scale;
+  renderer.setPixelRatio(dpr);
   renderer.setSize(w, h);
-  postProcessing.resize(w * window.devicePixelRatio, h * window.devicePixelRatio);
-  resolution.set(w * window.devicePixelRatio, h * window.devicePixelRatio);
+  postProcessing.resize(w * dpr, h * dpr);
+  resolution.set(w * dpr, h * dpr);
 }
 
 resize();
@@ -44,6 +47,7 @@ const gallery = new ShaderGallery({
   shaderNames: shaderManager.getShaderNames(),
   onShaderSelect: (name) => {
     shaderManager.loadShader(name);
+    resize();
     clock.start();
   },
   onBloomToggle: (enabled) => postProcessing.setBloomEnabled(enabled),
